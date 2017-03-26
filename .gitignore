@@ -1,3 +1,6 @@
+# This is a combination of ignore references from GitHub and gitignore.io
+# The gitignore.io stuff is what came up from Django and Python
+
 # Created by https://www.gitignore.io/api/pycharm
 
 ### PyCharm ###
