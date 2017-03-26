@@ -20,7 +20,7 @@ class Vendor(models.Model):
     contact_email = models.CharField(default="", max_length=100)
     contact_phone = models.CharField(default="", max_length=100)
     physical_address_line_1 = models.CharField(default="", max_length=100)
-    physical_address_line_2 = mogrdels.CharField(default="", max_length=100)
+    physical_address_line_2 = models.CharField(default="", max_length=100)
     physical_address_city = models.CharField(default="", max_length=100)
     physical_address_state = models.CharField(default="", max_length=50)
     physical_address_postal_code = models.CharField(default="", max_length=25)
