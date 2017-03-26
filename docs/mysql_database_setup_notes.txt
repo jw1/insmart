@@ -1,0 +1,14 @@
+-- Once a MySQL instance is set up locally, an insmart database and insmart user
+-- should be created so that Django can access the database.  The below SQL
+-- statements do just enough to make that happen.
+
+
+-- Create insmart database and insmart user.
+CREATE DATABASE insmart;
+
+-- Create the user and give it permissions
+CREATE USER 'insmart'@'localhost' IDENTIFIED BY 'insmart';
+GRANT ALL PRIVILEGES ON insmart.* TO 'insmart'@'localhost';
+
+-- Update the permissions on the running server.
+FLUSH PRIVILEGES;
