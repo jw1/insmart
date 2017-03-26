@@ -1,0 +1,4 @@
+The login stuff comes from here.  It seemed like a good place to start
+-- James
+
+https://simpleisbetterthancomplex.com/tutorial/2016/06/27/how-to-use-djangos-built-in-login-system.html
