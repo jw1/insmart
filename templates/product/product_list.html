@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+<ul>
+    {% for server in object_list %}
+    <li>{{ server.name }}  :
+    <a href="{% url "product_edit" product.name %}">{{ product.name }}</a>
+    <a href="{% url "product_delete" product.name %}">delete</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url "product_new" %}">New</a>
+</body>
+</html>
