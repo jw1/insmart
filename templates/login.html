@@ -1,23 +1,31 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
+{% load static %}
 
 {% block title %}InSmart Login{% endblock %}
 
 {% block content %}
-    <!-- Put some insmart logo stuff here -->
-    <h2>Login</h2>
 
-    <form method="post" class="form">
+<div class="container">
+    <div class="card card-container">
 
-        {% csrf_token %}
-        {% bootstrap_form form %}
+        <img id="profile-img" class="profile-img-card" src="{% static "insmart_logo_300.png" %}" alt="Logo"/>
+        <form method="post" class="form-signin">
 
-        {% buttons %}
+            {% csrf_token %}
+            {% bootstrap_form form %}
+
+            {% buttons %}
             <button type="submit" class="btn btn-primary">
                 {% bootstrap_icon "check" %} Login
             </button>
-        {% endbuttons %}
+            {% endbuttons %}
 
-    </form>
+        </form>
+    </div>
+</div>
+
 
 {% endblock %}
+
+
