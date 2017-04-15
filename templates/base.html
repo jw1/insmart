@@ -13,6 +13,8 @@
 <head>
     <meta charset="utf-8">
     <title>{% block title %}InSmart{% endblock %}</title>
+
+    <!-- This is supplementary CSS for the getbootstrap.com dashboard theme -- see static/index.html for the sample file -->
     <link href="{% static 'dashboard.css' %}" rel="stylesheet">
 </head>
 
@@ -32,6 +34,7 @@
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 {% endif %}
 
+<!-- Delegate to a child page. -->
 {% block content %}
 {% endblock %}
 
