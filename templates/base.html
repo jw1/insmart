@@ -1,17 +1,28 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  <title>{% block title %}Django Simple Login{% endblock %}</title>
+  <title>{% block title %}InSmart{% endblock %}</title>
 </head>
 <body>
   <header>
-    <h1>Django Simple Login</h1>
+    <h1>InSmart Login</h1>
     {% if user.is_authenticated %}
       Hi {{ user.username }}!
-      <a href="{% url 'logout' %}">logout</a>
+      <a href="{% url 'logout' %}">Logout</a>
     {% else %}
-      <a href="{% url 'login' %}">login</a>
+      <a href="{% url 'login' %}">Login</a>
     {% endif %}
   </header>
   <hr>
@@ -21,7 +32,7 @@
   </main>
   <hr>
   <footer>
-    <a href="http://simpleisbetterthancomplex.com">simpleisbetterthancomplex.com</a>
+    <a href="http://www.github.com/jw1/insmart">InSmart</a>
   </footer>
 </body>
 </html>
