@@ -1,6 +1,8 @@
 First:  To import bootstrap, I used a Django app called bootstrap3.  You'll see it in the insmart/settings.py file's
 INSTALLED_APPS section.  This means you'll probably need to pip or install it somehow.
 
+pip install django-bootstrap3  <<< From the command-line
+
 -----
 
 When working on your pages, you'll probably want to start with home.html and follow the format of it.
