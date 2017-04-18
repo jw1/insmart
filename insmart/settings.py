@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'product'
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -123,6 +123,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
+STATIC_ROOT = os.path.join(os.path.dirname(__file__), 'static/')
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(os.path.dirname(__file__), '../static/'),
+)
+
 LOGIN_REDIRECT_URL = 'home'
+
+
+# for password reset emails
+# https://simpleisbetterthancomplex.com/tutorial/2016/09/19/how-to-create-password-reset-view.html
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'box797.bluehost.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'insmart@jameswarlick.com'
+EMAIL_HOST_PASSWORD = 'zNDJBuCFSyb;4'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'insmart@jameswarlick.com'

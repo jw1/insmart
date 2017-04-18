@@ -1,0 +1,40 @@
+First:  To import bootstrap, I used a Django app called bootstrap3.  You'll see it in the insmart/settings.py file's
+INSTALLED_APPS section.  This means you'll probably need to pip or install it somehow.
+
+pip install django-bootstrap3  <<< From the command-line
+
+-----
+
+When working on your pages, you'll probably want to start with home.html and follow the format of it.
+Include the imports that you see in home.html, and check the user is authenticated.
+
+Follow the example in home.html for a consistent look and feel throughout the project.  I tried to add some comments
+along the way, so hopefully it's not too confusing.  Look at static/index.html for some content formatting ideas (it's
+the dashboard layout mentioned below).  Try and match the same CSS imports and what-not when possible.
+
+I'm no HTML and CSS expert, but I think using bootstrap will save us some time.  I recommend working with raw HTML or
+plain Django tags when you're not sure how things should look, then go back over your components and set the right CSS
+info afterwards.  Don't try to find the right bootstrap elements and django tags and html stuff all at once.  I found
+myself setting a few properties, refreshing the page, undoing what I did, trying it a different way, and repeating quite
+a bit.  It's nice that it'll automatically refresh content so you don't have to stop and start the server.
+
+-----
+
+Links:
+
+The "dashboard" layout at static/index.html is taken from here (scroll down to the examples):
+http://getbootstrap.com/getting-started/#download
+
+Bootstrap 3 plugin for Django.  There may have been a Bootstrap 4 plugin, but I opted for the battle-tested version.
+https://github.com/dyve/django-bootstrap3
+
+You will need this link.  This is where the tags we're going to use will come from.
+http://django-bootstrap3.readthedocs.io/en/latest/index.html
+
+If you need to get to the raw HTML with bootstrap, here's that link:
+https://www.w3schools.com/bootstrap/default.asp
+
+More bootstrap layout ideas here:
+http://bootsnipp.com/
+
+
