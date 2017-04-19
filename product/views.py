@@ -12,7 +12,7 @@ class ProductCreate(CreateView):
     model = Product
     success_url = reverse_lazy('product_list')
     fields = ['vendors', 'name', 'description', 'brand',
-              'minimum', 'maximum', 'current' ]
+              'minimum', 'maximum', 'current']
 
 class ProductUpdate(UpdateView):
     model = Product

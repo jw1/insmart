@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}InSmart{% endblock %}
+{% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +10,9 @@
 </head>
 <body>
 <ul>
-    {% for server in object_list %}
-    <li>{{ server.name }}  :
-    <a href="{% url "product_edit" product.name %}">{{ product.name }}</a>
+    {% for product in object_list %}
+    <li>{{ product.name }}  :
+    <a href="{% url "product_edit" product.name %}">{{ product.brand }}</a>
     <a href="{% url "product_delete" product.name %}">delete</a>
     </li>
     {% endfor %}
@@ -17,3 +21,5 @@
 <a href="{% url "product_new" %}">New</a>
 </body>
 </html>
+
+{% endblock %}
