@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
+    'axes',
 ]
 
 MIDDLEWARE = [
@@ -142,3 +143,6 @@ EMAIL_HOST_USER = 'insmart@jameswarlick.com'
 EMAIL_HOST_PASSWORD = 'zNDJBuCFSyb;4'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'insmart@jameswarlick.com'
+
+# for Django Axes (session lockout stuff)
+AXES_LOCKOUT_URL = 'lockout'
