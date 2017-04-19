@@ -1,4 +1,11 @@
 <h1>Users</h1>
+
+<form method="get" action="{% url "user_list" %}">
+    <label for="id_q">Search:</label>
+               <input type="text" name="q" id="id_q"/>
+               <input type="submit" value="Submit"/>
+</form>
+
 <ul>
     {% for user in object_list %}
     <li>

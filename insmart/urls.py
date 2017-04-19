@@ -40,7 +40,7 @@ urlpatterns = [
     # django axes stuff
     url(r'^login/lockout$', TemplateView.as_view(template_name='lockout.html'), name='lockout'),
 
-    # auth
+    # user_management
     url(r'^user_management/', include('user_management.urls')),
 
 ]
