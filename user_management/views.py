@@ -50,6 +50,51 @@ def user_delete(request, pk, template_name='user_management/user_confirm_delete.
         return redirect('user_list')
     return render(request, template_name, {'object':user})
 
+#
+# This section here renders the list as a PDF, to fulfill the reporting
+# requirement.  We said we'd investigate and maybe generate one in our FRs.
+#
+# This is very quick and dirty.
+#
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from django.http import HttpResponse
+
+def user_list_as_pdf(request):
+    # Create the HttpResponse object with the appropriate PDF headers.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="users.pdf"'
+
+    # Create the PDF object, using the response object as its "file."
+    p = canvas.Canvas(response)
+    width, height = letter
+
+    y = height
+    p.drawString(x=300, y=y, text="InSmart Users")
+
+    y-=25
+    p.drawString(x=25, y=y, text="ID #")
+    p.drawString(x=75, y=y, text="First Name")
+    p.drawString(x=175, y=y, text="Last Name")
+    p.drawString(x=275, y=y, text="Email")
+    p.drawString(x=450, y=y, text="Super")
+    p.drawString(x=500, y=y, text="Active")
+
+    y -= 25
+    for user in User.objects.all():
+        p.drawString(x=25, y=y, text=str(user.id))
+        p.drawString(x=75, y=y, text=user.first_name)
+        p.drawString(x=175, y=y, text=user.last_name)
+        p.drawString(x=275, y=y, text=user.email)
+        p.drawString(x=450, y=y, text=str(user.is_superuser))
+        p.drawString(x=500, y=y, text=str(user.is_active))
+        y-= 25
+
+    # Close the PDF object cleanly, and we're done.
+    p.showPage()
+    p.save()
+    return response
+
 
 
 # quick and dirty search impl here

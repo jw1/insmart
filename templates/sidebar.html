@@ -4,7 +4,7 @@
         <li class="active"><a href="{% url 'home' %}">Dashboard <span class="sr-only">(current)</span></a></li>
         <li><a href="#">Vendors</a></li>
         <li><a href="#">Products</a></li>
-        <li><a href="#">Reports</a></li>
+        <li><a href="{% url 'reports' %}">Reports</a></li>
     </ul>
     <ul class="nav nav-sidebar">
         {% if user.is_authenticated and user.is_superuser %} <!-- Only the supers should do this -->

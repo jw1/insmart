@@ -1,0 +1,7 @@
+In order to fulfill the "reporting" requirement, I followed a guide here:
+
+This requires a new import, so:
+
+pip install reportlab         <<<<< from the command-line
+
+I plan to have the user list be reportable.  That's it.
