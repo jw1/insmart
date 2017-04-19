@@ -1,25 +1,58 @@
 {% extends 'base.html' %}
 {% block title %}InSmart{% endblock %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
 {% load static %}
 
 {% block content %}
-{% if user.is_authenticated %}
+{% if user.is_authenticated and user.is_superuser %}
 
-<h1>Users</h1>
+<h1 class="page-header">Users</h1>
+
 
 <form method="get" action="{% url "user_list" %}">
+
     <label for="id_q">Search:</label>
-               <input type="text" name="q" id="id_q"/>
-               <input type="submit" value="Submit"/>
+    <input type="text" name="q" id="id_q"/>
+
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">
+        {% bootstrap_icon "search" %} Search
+    </button>
+    {% endbuttons %}
 </form>
 
-<ul>
-    {% for user in object_list %}
-    <li>
-        {{ user.id }}, {{ user.username }} : <a href="{% url "user_edit" user.id %}">{{ user.email }}</a> <a href="{% url "user_delete" user.id %}">delete</a>
-    </li>
-    {% endfor %}
-</ul>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID #</th>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in object_list %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.email }}</td>
+            <td><a href="{% url "user_edit" user.id %}">Edit</a></td>
+            <td><a href="{% url "user_delete" user.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 <a href="{% url "user_new" %}">New</a>
 
