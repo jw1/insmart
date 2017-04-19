@@ -169,6 +169,3 @@ ENV/
 # Rope project settings
 .ropeproject
 
-# James added these because they seem to change all the time
-.idea/insmart.iml
-.idea/misc.xml
