@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
+    'axes',
 ]
 
 MIDDLEWARE = [
@@ -142,3 +143,17 @@ EMAIL_HOST_USER = 'insmart@jameswarlick.com'
 EMAIL_HOST_PASSWORD = 'zNDJBuCFSyb;4'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'insmart@jameswarlick.com'
+
+
+# for Django Axes (session lockout stuff)
+# See https://django-axes.readthedocs.io/en/latest/configuration.html#customizing-axes for more.
+AXES_LOCKOUT_URL = 'lockout'                # Where to send a locked out IP address
+AXES_COOLOFF_TIME = 1                       # Number of hours until the lockout is "forgotten"
+AXES_LOGIN_FAILURE_LIMIT = 5                # How many is too many?
+AXES_LOCK_OUT_AT_FAILURE = True             # Toggle switch for the whole plugin.
+
+
+# Session Expiration Settings
+# See https://docs.djangoproject.com/en/dev/topics/http/sessions/#session-save-every-request
+SESSION_SAVE_EVERY_REQUEST = True           # Unoptimized method of keeping the session alive.
+SESSION_COOKIE_AGE = 155 * 60               # Expire the session after 15 minutes of inactivity
