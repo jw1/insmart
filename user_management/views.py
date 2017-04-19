@@ -11,7 +11,7 @@ from django.forms import ModelForm
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'is_superuser', 'is_active']
+        fields = ['username', 'first_name', 'last_name', 'email', 'is_superuser', 'is_active']
 
 
 def user_list(request, template_name='user_management/user_list.html'):
