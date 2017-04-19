@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}InSmart{% endblock %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
 {% load static %}
+
 <!--
 When constructing pages:
 1.  Always extend base.html so that CSS and session info can be loaded.
@@ -13,10 +19,10 @@ It will need to be replaced with "alert" content someday.
 {% block content %}
 {% if user.is_authenticated %}
 
+{% bootstrap_messages %}
+
 <h1 class="page-header">Dashboard</h1>
 
-<!-- The main home page should show any alerts.  Make this do that. -->
-<!-- Remove this note when not needed -->
 <p>Below is some of the template junk from the dashboard template at getbootstrap.com.  Should provide a few ideas on how to render certain things</p>
 <p>See the base.html file for how to do images and other static content.  </p>
 

@@ -1,0 +1,11 @@
+We use the Django Axes project to do some lockout related functionality for us:
+https://django-axes.readthedocs.io/en/latest/configuration.html
+
+In our project, we aim to have lockouts after successive invalid logins.
+
+So, be sure to add the library to the project:
+pip3 install django-axes  <<< From the command-line
+
+Remember to run python manage.py migrate to sync the database.
+
+If you mess up and lock yourself out, then issue "axes_reset" from the manage.py console.

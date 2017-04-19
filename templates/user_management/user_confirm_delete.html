@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}InSmart{% endblock %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% load static %}
+
+{% block content %}
+
+{% if user.is_authenticated and user.is_superuser %}
+
+<h1 class="page-header">Delete User</h1>
+
+<form method="post">{% csrf_token %}
+    <p>Are you sure you want to delete the user "{{ object }}" ?</p>
+
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">
+            {% bootstrap_icon "remove" %} Delete
+        </button>
+    {% endbuttons %}
+</form>
+
+{% else %}
+{% include 'home_missing_session.html' %}
+{% endif %}
+
+{% endblock %}
