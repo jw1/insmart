@@ -33,17 +33,7 @@ class Vendor(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
 
-class Product(models.Model):
-    vendors = models.ManyToManyField(Vendor)
-    name = models.CharField(max_length=50)
-    description = models.CharField(null=True, max_length=250)
-    brand = models.CharField(null=True, max_length=50)
-    minimum = models.IntegerField(default=0)
-    maximum = models.IntegerField(default=9999999)
-    current = models.IntegerField(default=0)
-    created_at = models.DateTimeField(auto_now=True)
-    active = models.BooleanField(default=True)
-
+from product.models import Product
 class InventoryAuditLog(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user_id = models.IntegerField()

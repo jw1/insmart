@@ -3,18 +3,18 @@ from product import views
 
 urlpatterns = [
     url(r'^$',
-        views.ProductList.as_view(),
-        name='Product_list'),
+        views.product_list,
+        name='product_list'),
 
     url(r'^new$',
-        views.ProductCreate.as_view(),
+        views.product_create,
         name='product_new'),
 
     url(r'^edit/(?P<pk>\d+)$',
-        views.ProductUpdate.as_view(),
+        views.product_update,
         name='product_edit'),
 
     url(r'^delete/(?P<pk>\d+)$',
-        views.ProductDelete.as_view(),
-        name='ProductDelete_delete'),
+        views.product_delete,
+        name='product_delete'),
 ]

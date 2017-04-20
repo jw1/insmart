@@ -11,9 +11,9 @@
 <body>
 <ul>
     {% for product in object_list %}
-    <li>{{ product.name }}  :
-    <a href="{% url "product_edit" product.name %}">{{ product.brand }}</a>
-    <a href="{% url "product_delete" product.name %}">delete</a>
+    <li>{{ product.name }}:
+    <a href="{% url "product_edit" product.id %}">edit</a>
+    <a href="{% url "product_delete" product.id %}">delete</a>
     </li>
     {% endfor %}
 </ul>
