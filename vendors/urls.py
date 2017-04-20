@@ -7,4 +7,5 @@ urlpatterns = [
   url(r'^new$', views.vendor_create, name='vendor_new'),
   url(r'^edit/(?P<pk>\d+)$', views.vendor_update, name='vendor_edit'),
   url(r'^delete/(?P<pk>\d+)$', views.vendor_delete, name='vendor_delete'),
+#  url(r'^view/(?P<pk>\d+)$', views.vendor_view, name='vendor_view'),
 ]
