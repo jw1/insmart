@@ -32,7 +32,10 @@ class Vendor(models.Model):
     mailing_address_country = models.CharField(default="", max_length=50)
     created_at = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
-
+    def __unicode__(self):
+        return self.name
+    def get_absolute_url(self):
+        return reverse('product_edit', kwargs={'pk': self.pk})
 from product.models import Product
 class InventoryAuditLog(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
