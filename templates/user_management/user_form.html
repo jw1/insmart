@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}InSmart{% endblock %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_superuser %}
+
+<h1 class="page-header">User Information</h1>
+<p>Please enter all information before pressing the Save button.</p>
+<p>When a new user is created, the user must use the reset password functionality to create their initial password.</p>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">
+        {% bootstrap_icon "check" %} Save
+    </button>
+    {% endbuttons %}
+</form>
+
+
+
+{% else %}
+{% include 'home_missing_session.html' %}
+{% endif %}
+
+{% endblock %}

@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import TemplateView
+from insmart import views
 
 urlpatterns = [
 
@@ -24,6 +25,9 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'logged_out.html'}, name='logout'),
+
+    # reports
+    url(r'^reports/$', TemplateView.as_view(template_name='reports.html'), name='reports'),
 
     # tutorial stuff
     url(r'^polls/', include('polls.urls')),
@@ -39,6 +43,14 @@ urlpatterns = [
 
     #Vendors
     url(r'^vendors/', include('vendors.urls')),
+    url(r'^change-password/$', views.change_password, name='change_password'),
+
+    # django axes stuff
+    url(r'^login/lockout$', TemplateView.as_view(template_name='lockout.html'), name='lockout'),
+
+    # user_management
+    url(r'^user_management/', include('user_management.urls')),
+
 ]
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}InSmart{% endblock %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% load static %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<h1 class="page-header">Reports</h1>
+
+<p>Reports are available in PDF format (suitable for printing), and will automatically open in the configured PDF viewer installed on the end user system.  If a PDF viewer is not installed, <a href="https://acrobat.adobe.com/us/en/acrobat/pdf-reader.html">Adobe Acrobat</a> can be used to view PDF files.</p>
+
+{% if user.is_authenticated and user.is_superuser %}
+<h2 class="sub-header">User Management Reports</h2>
+<ul>
+    <li><a href="{% url "user_list_as_pdf" %}">Users</a></li>
+</ul>
+{% endif %}
+
+<h2 class="sub-header">Other Reports</h2>
+<ul>
+    <li><p>To be added at a later date</p></li>
+</ul>
+
+{% else %}
+{% include 'home_missing_session.html' %}
+{% endif %}
+
+{% endblock %}
+
+

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}InSmart{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="span4"></div>
+        <div class="span4"><img class="center-block" src="{% static "insmart_logo_300.png" %}" /></div>
+        <div class="span4"></div>
+    </div>
+    <div class="row">
+        <p class="text-center">There have been too many consecutive unsuccessful login attempts, and this account is temporarily locked out.</p></div>
+    </div>
+</div>
+
+{% endblock %}

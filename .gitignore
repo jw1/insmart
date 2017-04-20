@@ -168,3 +168,7 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Markdown Navigator Plugin Settings
+.idea/markdown-navigator.xml
+.idea/markdown-navigator/
