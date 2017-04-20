@@ -1,20 +1,11 @@
-from __future__ import unicode_literals
-
 from django.db import models
-
+from django.core.urlresolvers import reverse
+#from polls.models import Vendor
 # Create your models here.
-# Models from Tutorial here
-class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
-class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
 
-# Models for InSmart
+
 class Vendor(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(default=" ", max_length=100)
     website_address = models.CharField(default="", max_length=200)
     contact_name = models.CharField(default="", max_length=100)
     contact_email = models.CharField(default="", max_length=100)
@@ -34,19 +25,6 @@ class Vendor(models.Model):
     active = models.BooleanField(default=True)
     def __str__(self):
         return self.name
+
     def get_absolute_url(self):
-        return reverse('product_edit', kwargs={'pk': self.pk})
-
-
-from product.models import Product
-class InventoryAuditLog(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    user_id = models.IntegerField()
-    before = models.IntegerField()
-    after = models.IntegerField()
-    adjustment = models.IntegerField()
-    created_at = models.DateTimeField(auto_now=True)
-    memo = models.TextField(null=True)
-
-
-
+        return reverse('vendor_edit', kwargs={'pk': self.pk})

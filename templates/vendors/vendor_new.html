@@ -1,0 +1,28 @@
+<h1>Vendors</h1>
+<ul>
+    {% for vendor in object_list %}
+    <li>{{ vendor.name }}  :
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.name}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.website_address}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.contact_name}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.contact_email}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.contact_phone}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.physical_address_line_1}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.physical_address_line_2}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.physical_address_city}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.physical_address_state}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.physical_address_postal_code}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.physical_address_country}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.mailing_address_line_1}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.mailing_address_line_2}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.mailing_address_state}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.mailing_address_postal_code}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.mailing_address_country}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.created_at}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.active}}</a>
+    <a href="{% url "vendor_delete" vendor.id %}">delete</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url "vendor_new" %}">New</a>

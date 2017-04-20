@@ -1,4 +1,4 @@
--- Once a MySQL instance is set up locally, an insmart database and insmart user
+ -- Once a MySQL instance is set up locally, an insmart database and insmart user
 -- should be created so that Django can access the database.  The below SQL
 -- statements do just enough to make that happen.
 

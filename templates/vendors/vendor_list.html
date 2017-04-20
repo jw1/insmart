@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}InSmart{% endblock %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_superuser %}
+
+<h1 class="page-header">Vendors</h1>
+
+
+<form method="get" action="{% url "vendor_list" %}">
+
+    <label for="id_q">Search:</label>
+    <input type="text" name="q" id="id_q"/>
+
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">
+        {% bootstrap_icon "search" %} Search
+    </button>
+    {% endbuttons %}
+</form>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Website</th>
+            <th>Contact Name</th>
+            <th>Contact Email</th>
+            <th>Contact Phone</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for vendor in object_list %}
+        <tr>
+            <td>{{ vendor.id }}</td>
+            <td> <a href="{% url "vendor_detail" vendor.id %}">{{ vendor.name}}</a> </td>
+            <td>{{ vendor.website_address }}</td>
+            <td>{{ vendor.contact_name }}</td>
+            <td>{{ vendor.contact_email }}</td>
+            <td>{{ vendor.contact_phone }}</td>
+            <td><a href="{% url "vendor_edit" vendor.id %}">Edit</a></td>
+            <td><a href="{% url "vendor_delete" vendor.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<a href="{% url "vendor_new" %}">New</a>
+
+
+{% else %}
+{% include 'home_missing_session.html' %}
+{% endif %}
+
+{% endblock %}
