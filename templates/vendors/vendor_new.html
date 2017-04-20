@@ -1,153 +1,28 @@
-<form class="form-horizontal">
-<fieldset>
+<h1>Vendors</h1>
+<ul>
+    {% for vendor in object_list %}
+    <li>{{ vendor.name }}  :
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.name}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.website_address}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.contact_name}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.contact_email}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.contact_phone}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.physical_address_line_1}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.physical_address_line_2}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.physical_address_city}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.physical_address_state}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.physical_address_postal_code}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.physical_address_country}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.mailing_address_line_1}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.mailing_address_line_2}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.mailing_address_state}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.mailing_address_postal_code}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.mailing_address_country}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.created_at}}</a>
+    <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.active}}</a>
+    <a href="{% url "vendor_delete" vendor.id %}">delete</a>
+    </li>
+    {% endfor %}
+</ul>
 
-<!-- Form Name -->
-<legend>Vendor Edit</legend>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="name">Vendor Name</label>
-  <div class="col-md-4">
-  <input id="vendor.name" name="name" type="text" placeholder="" class="form-control input-md" required="">
-
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="website_address">Website Address</label>
-  <div class="col-md-4">
-  <input id="vendor.website_address" name="website_address" type="text" placeholder="" class="form-control input-md" required="">
-
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="contact_name">Contact Name</label>
-  <div class="col-md-4">
-  <input id="vendor.contact_name" name="contact_name" type="text" placeholder="" class="form-control input-md" required="">
-
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="contact_email">Contact Email</label>
-  <div class="col-md-4">
-  <input id="contact_email" name="contact_email" type="text" placeholder="" class="form-control input-md" required="">
-
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="contact_phone">Contact Phone</label>
-  <div class="col-md-4">
-  <input id="contact_phone" name="contact_phone" type="text" placeholder="" class="form-control input-md" required="">
-
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="physical_address_line_1">Physical Address Line 1</label>
-  <div class="col-md-4">
-  <input id="physical_address_line_1" name="physical_address_line_1" type="text" placeholder="" class="form-control input-md" required="">
-
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="physical_address_line_2">Physical Address Line 2</label>
-  <div class="col-md-4">
-  <input id="physical_address_line_2" name="physical_address_line_2" type="text" placeholder="" class="form-control input-md" required="">
-
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="physical_address_city">Physical Address City</label>
-  <div class="col-md-4">
-  <input id="physical_address_city" name="physical_address_city" type="text" placeholder="" class="form-control input-md" required="">
-
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="physical_address_state">Physical Address State</label>
-  <div class="col-md-4">
-  <input id="physical_address_state" name="physical_address_state" type="text" placeholder="" class="form-control input-md" required="">
-
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="physical_address_postal_code">Physical Address Postal Code</label>
-  <div class="col-md-4">
-  <input id="physical_address_postal_code" name="physical_address_postal_code" type="text" placeholder="" class="form-control input-md" required="">
-
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="physical_address_country">Physical Address Country</label>
-  <div class="col-md-4">
-  <input id="physical_address_country" name="physical_address_country" type="text" placeholder="" class="form-control input-md" required="">
-
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="mailing_address_line_1">Mailing Address Line 1</label>
-  <div class="col-md-4">
-  <input id="mailing_address_line_1" name="mailing_address_line_1" type="text" placeholder="" class="form-control input-md" required="">
-
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="mailing_address_line_2">Mailing Address Line 2</label>
-  <div class="col-md-4">
-  <input id="mailing_address_line_2" name="mailing_address_line_2" type="text" placeholder="" class="form-control input-md" required="">
-
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="mailing_address_state">Mailing Address State</label>
-  <div class="col-md-4">
-  <input id="mailing_address_state" name="mailing_address_state" type="text" placeholder="" class="form-control input-md" required="">
-
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="mailing_address_postal_code">Mailing Address Postal Code</label>
-  <div class="col-md-4">
-  <input id="mailing_address_postal_code" name="mailing_address_postal_code" type="text" placeholder="" class="form-control input-md" required="">
-
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="mailing_address_country">Mailing Address Country</label>
-  <div class="col-md-4">
-  <input id="mailing_address_country" name="mailing_address_country" type="text" placeholder="" class="form-control input-md" required="">
-
-  </div>
-</div>
-
-<input type="submit" value="Submit" />
-</fieldset>
-</form>
+<a href="{% url "vendor_new" %}">New</a>
