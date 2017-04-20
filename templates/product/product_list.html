@@ -30,7 +30,7 @@
             <td><a href="{% url "product_edit" product.id %}">edit</a></td>
             <td><a href="{% url "product_delete" product.id %}">delete</a></td>
             {% else %}
-        <tr class = "warning">
+        <tr>
             <td><p class = "text-muted">{{ product.active|yesno:"Active,Inactive" }}</p></td>
             <td><p class = "text-muted"><a href = "{% url "product_detail" product.id %}">{{ product.name }}</a></p></td>
             <td><p class = "text-muted">{{ product.brand }}</p></td>
