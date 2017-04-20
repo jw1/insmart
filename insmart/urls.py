@@ -30,9 +30,6 @@ urlpatterns = [
     # reports
     url(r'^reports/$', TemplateView.as_view(template_name='reports.html'), name='reports'),
 
-    # tutorial stuff
-    url(r'^polls/', include('polls.urls')),
-
     # administration
     url(r'^admin/', admin.site.urls),
 

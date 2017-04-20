@@ -11,9 +11,17 @@ class VendorForm(ModelForm):
 'mailing_address_country', 'active']
 
 def vendor_list(request, template_name='vendors/vendor_list.html'):
-    vendors = Vendor.objects.all()
+
+    # search if something was provided to search on
+    if ('q' in request.GET) and request.GET['q'].strip():
+        query_string = request.GET['q']
+        entry_query = get_query(query_string, VendorForm.Meta.fields) # I search on all fields.  Adjust as needed.
+        vendor = Vendor.objects.filter(entry_query)
+    else:
+        vendor = Vendor.objects.all()
+
     data = {}
-    data['object_list'] = vendors
+    data['object_list'] = vendor
     return render(request, template_name, data)
 
 def vendor_create(request, template_name='vendors/vendors_form.html'):
@@ -43,3 +51,33 @@ class VendorDetail(DetailView):
     def get_object(self):
         object = super(VendorDetail, self).get_object()
         return object
+
+
+import re
+from django.db.models import Q
+
+def normalize_query(query_string,
+                    findterms=re.compile(r'"([^"]+)"|(\S+)').findall,
+                    normspace=re.compile(r'\s{2,}').sub):
+    return [normspace(' ', (t[0] or t[1]).strip()) for t in findterms(query_string)]
+
+
+def get_query(query_string, search_fields):
+
+    ''' Returns a query, that is a combination of Q objects. That combination aims to search keywords within a model by testing the given search fields. '''
+
+    query = None  # Query to search for every search term
+    terms = normalize_query(query_string)
+    for term in terms:
+        or_query = None  # Query to search for a given term in each field
+        for field_name in search_fields:
+            q = Q(**{"%s__icontains" % field_name: term})
+            if or_query is None:
+                or_query = q
+            else:
+                or_query = or_query | q
+        if query is None:
+            query = or_query
+        else:
+            query = query & or_query
+    return query
