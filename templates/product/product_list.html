@@ -1,25 +1,43 @@
 {% extends 'base.html' %}
 {% block title %}InSmart{% endblock %}
+
+{ % load bootstrap3 %}
+{ % bootstrap_css % }
+{ % boostrap_javascript % }
+
 {% load static %}
+
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Products</title>
-</head>
+{% if user.is_authenticated %}
 <body>
-<ul>
-    {% for product in object_list %}
-    <li>{{ product.name }}:
-    <a href="{% url "product_edit" product.id %}">edit</a>
-    <a href="{% url "product_delete" product.id %}">delete</a>
-    </li>
-    {% endfor %}
-</ul>
+<h1 class="page-header">Products<small> Manage your Inventory</small></h1>
+<div class = "table-responsive">
+    <table class = "table table-striped">
+        <thead>
+        <tr>
+            <th> ID # </th>
+            <th> Name </th>
+            <th> Brand </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in object_list %}
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.brand }}</td>
+            <td><a href="{% url "product_edit" product.id %}">edit</a></td>
+            <td><a href="{% url "product_delete" product.id %}">delete</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 <a href="{% url "product_new" %}">New</a>
 </body>
-</html>
 
+{% else %}
+{% include 'home_missing_session.html' %}
+{% endif %}
 {% endblock %}

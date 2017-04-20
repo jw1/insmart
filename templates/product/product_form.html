@@ -1,19 +1,31 @@
 {% extends 'base.html' %}
 {% block title %}InSmart{% endblock %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
 {% load static %}
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+
+{% if user.is_authenticated %}
 <body>
-<form method="post">{% csrf_token %}
+
+<h1 class="page-header">Edit Product</h1>
+<form method="post">
+
+    {% csrf_token %}
+
     {{ form.as_p }}
-    <input type="submit" value="Submit" />
+
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">
+        {% bootstrap_icon "check" %} Save
+    </button>
+    {% endbuttons %}
 </form>
 </body>
-</html>
-
+{% else %}
+{% include 'home_missing_session.html' %}
+{% endif %}
 {% endblock %}
