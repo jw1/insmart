@@ -43,7 +43,7 @@
         {% for vendor in object_list %}
         <tr>
             <td>{{ vendor.id }}</td>
-            <td> <a href="{% url "vendor_edit" vendor.id %}">{{ vendor.name}}</a> </td>
+            <td> <a href="{% url "vendor_detail" vendor.id %}">{{ vendor.name}}</a> </td>
             <td>{{ vendor.website_address }}</td>
             <td>{{ vendor.contact_name }}</td>
             <td>{{ vendor.contact_email }}</td>

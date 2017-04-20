@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
+#from vendors.models import Vendor
 # Create your models here.
 # Models from Tutorial here
 class Question(models.Model):
@@ -14,7 +14,7 @@ class Choice(models.Model):
 
 # Models for InSmart
 class Vendor(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(default=" ", max_length=100)
     website_address = models.CharField(default="", max_length=200)
     contact_name = models.CharField(default="", max_length=100)
     contact_email = models.CharField(default="", max_length=100)

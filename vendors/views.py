@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
 
 from vendors.models import Vendor
-
+from django.views.generic import DetailView
 
 class VendorForm(ModelForm):
     class Meta:
@@ -37,3 +37,9 @@ def vendor_delete(request, pk, template_name='vendors/vendor_confirm_delete.html
         vendor.delete()
         return redirect('vendor_list')
     return render(request, template_name, {'object':vendor})
+
+class VendorDetail(DetailView):
+    queryset = Vendor.objects.all()
+    def get_object(self):
+        object = super(VendorDetail, self).get_object()
+        return object

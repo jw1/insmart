@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block title %}InSmart{% endblock %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% load static %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<body>
+<div class = "container">
+    <h1 class = "page-header">Vendor Detail: {{ object.name }}</h1>
+    <table class ="table-bordered table-responsive table">
+        <tr>
+            <th class ="col-2">ID </th>
+            <td class = "col-4">{{ object.id }}</td>
+        </tr>
+        <tr>
+            <th class ="col-2">Name </th>
+            <td class = "col-4">{{ object.name }}</td>
+        </tr>
+
+        <tr>
+            <th class ="col-2">Website </th>
+            <td class = "col-4">{{ object.website_address }}</td>
+        </tr>
+        <tr>
+            <th class ="col-2">Contact Name </th>
+            <td class = "col-4">{{ object.contact_name }}</td>
+        </tr>
+        <tr>
+            <th class ="col-2">Contact Email </th>
+            <td class = "col-4">{{ object.contact_email }}</td>
+        </tr>
+        <tr>
+            <th class ="col-2">Contact Phone </th>
+            <td class = "col-4">{{ object.contact_phone }}</td>
+        </tr>
+        <tr>
+            <th class ="col-2">Physical Address Line 1 </th>
+            <td class = "col-4">{{ object.physical_address_line_1 }}</td>
+        </tr>
+        <tr>
+            <th class ="col-2">Physical Address Line 2 </th>
+            <td class = "col-4">{{ object.physical_address_line_2 }}</td>
+        </tr>
+        <tr>
+            <th class ="col-2">Physical Address City </th>
+            <td class = "col-4">{{ object.physical_address_city }}</td>
+        </tr>
+        <tr>
+            <th class ="col-2">Physical Address State </th>
+            <td class = "col-4">{{ object.physical_address_state }}</td>
+        </tr>
+        <tr>
+            <th class ="col-2">Physical Address Postal Code </th>
+            <td class = "col-4">{{ object.physical_address_postal_code }}</td>
+        </tr>
+        <tr>
+            <th class ="col-2">Physical Address Country </th>
+            <td class = "col-4">{{ object.physical_address_country }}</td>
+        </tr>
+        <tr>
+            <th class ="col-2">Mailing Address Line 1 </th>
+            <td class = "col-4">{{ object.mailing_address_line_1 }}</td>
+        </tr>
+        <tr>
+            <th class ="col-2">Mailing Address Line 2 </th>
+            <td class = "col-4">{{ object.mailing_address_line_2 }}</td>
+        </tr>
+        <tr>
+            <th class ="col-2">Mailing Address State </th>
+            <td class = "col-4">{{ object.mailing_address_state }}</td>
+        </tr>
+        <tr>
+            <th class ="col-2">Mailing Address Postal Code </th>
+            <td class = "col-4">{{ object.mailing_address_postal_code }}</td>
+        </tr>
+        <tr>
+            <th class ="col-2">Mailing Address Country </th>
+            <td class = "col-4">{{ object.mailing_address_country }}</td>
+        </tr>
+        <tr>
+            <th class ="col-2">Active </th>
+            <td class = "col-4">{{ object.active|yesno:"Active, Inactive " }}</td>
+        </tr>
+    </table>
+    {% buttons %}
+      <a href="{% url "vendor_edit" object.id %}" class="btn btn-info" role="button">Edit</a>
+    {% endbuttons %}
+</div>
+</body>
+{% else %}
+{% include 'home_missing_session.html' %}
+{% endif %}
+{% endblock %}
