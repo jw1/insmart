@@ -24,7 +24,7 @@
         {% for product in object_list %}
         {% if product.active %}
         <tr class = "active">
-            <td>{{ product.id }}</td>
+            <td><a href = "{% url "product_detail" product.id %}">{{ product.id }}</a></td>
             <td>{{ product.name }}</td>
             <td>{{ product.brand }}</td>
             <td><a href="{% url "product_edit" product.id %}">edit</a></td>

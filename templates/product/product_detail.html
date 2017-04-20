@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Product Detail: {{ object.name }}</h2>
+    <ul>
+        <li>brand: {{ object.brand }}</li>
+        <li>In Stock: {{object.current}}</li>
+    </ul>
+{% endblock %}
+
+</body>
+</html>

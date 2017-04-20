@@ -1,12 +1,20 @@
 from django.forms import ModelForm
 from django.shortcuts import render, redirect, get_object_or_404
 from product.models import Product
+from django.views.generic import DetailView
 
 class ProductForm(ModelForm):
     class Meta:
         model = Product
         fields = ['vendors', 'name', 'description', 'brand',
               'minimum', 'maximum', 'current', 'active']
+
+class ProductDetail(DetailView):
+    queryset = Product.objects.all()
+    def get_object(self):
+        object = super(ProductDetail, self).get_object()
+        return object
+
 
 def product_list(request, template_name = 'product/product_list.html'):
     product = Product.objects.all()

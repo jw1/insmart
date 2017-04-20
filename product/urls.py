@@ -17,4 +17,8 @@ urlpatterns = [
     url(r'^delete/(?P<pk>\d+)$',
         views.product_delete,
         name='product_delete'),
-]
+
+    url(r'^detail/(?P<pk>\d+)$',
+        views.ProductDetail.as_view(),
+        name='product_detail')
+    ]
