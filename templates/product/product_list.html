@@ -22,13 +22,26 @@
         </thead>
         <tbody>
         {% for product in object_list %}
-        <tr>
+        {% if product.active %}
+        <tr class = "active">
             <td>{{ product.id }}</td>
             <td>{{ product.name }}</td>
             <td>{{ product.brand }}</td>
             <td><a href="{% url "product_edit" product.id %}">edit</a></td>
             <td><a href="{% url "product_delete" product.id %}">delete</a></td>
+            {% else %}
+        <tr class = "warning">
+            <td><p class = "text-muted">{{ product.id }}</p></td>
+            <td><p class = "text-muted">{{ product.name }}</p></td>
+            <td><p class = "text-muted">{{ product.brand }}</p></td>
+            <td><a href="{% url "product_edit" product.id %}">edit</a></td>
+            <td><a href="{% url "product_delete" product.id %}">delete</a></td>
+            {% endif %}
+
+
         </tr>
+
+
         {% endfor %}
         </tbody>
     </table>
