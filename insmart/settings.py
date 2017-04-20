@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap3',
     'vendors',
+    'product',
     'axes',
     'user_management',
 ]
