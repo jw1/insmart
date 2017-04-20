@@ -24,15 +24,15 @@
         {% for product in object_list %}
         {% if product.active %}
         <tr class = "active">
-            <td><a href = "{% url "product_detail" product.id %}">{{ product.id }}</a></td>
-            <td>{{ product.name }}</td>
+            <td>{{ product.id }}</td>
+            <td><a href = "{% url "product_detail" product.id %}">{{ product.name }}</a></td>
             <td>{{ product.brand }}</td>
             <td><a href="{% url "product_edit" product.id %}">edit</a></td>
             <td><a href="{% url "product_delete" product.id %}">delete</a></td>
             {% else %}
         <tr class = "warning">
-            <td><p class = "text-muted">{{ product.id }}</p></td>
-            <td><p class = "text-muted">{{ product.name }}</p></td>
+            <td><p class = "text-muted">{{ product.active|yesno:"Active,Inactive" }}</p></td>
+            <td><p class = "text-muted"><a href = "{% url "product_detail" product.id %}">{{ product.name }}</a></p></td>
             <td><p class = "text-muted">{{ product.brand }}</p></td>
             <td><a href="{% url "product_edit" product.id %}">edit</a></td>
             <td><a href="{% url "product_delete" product.id %}">delete</a></td>
