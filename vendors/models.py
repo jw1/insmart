@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.urlresolvers import reverse
+#from product.models import Product
 #from polls.models import Vendor
 # Create your models here.
 

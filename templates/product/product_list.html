@@ -1,16 +1,29 @@
 {% extends 'base.html' %}
 {% block title %}InSmart{% endblock %}
 
-{ % load bootstrap3 %}
-{ % bootstrap_css % }
-{ % boostrap_javascript % }
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
 {% load static %}
 
 {% block content %}
-{% if user.is_authenticated %}
-<body>
+{% if user.is_authenticated and user.is_superuser %}
+
 <h1 class="page-header">Products<small> Manage your Products</small></h1>
+
+<form method="get" action="{% url "product_list" %}">
+
+    <label for="id_q">Search:</label>
+    <input type="text" name="q" id="id_q"/>
+
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">
+        {% bootstrap_icon "search" %} Search
+    </button>
+    {% endbuttons %}
+</form>
+
 <div class = "table-responsive">
     <table class = "table table-striped">
         <thead>
@@ -48,7 +61,7 @@
 </div>
 
 <a href="{% url "product_new" %}">New</a>
-</body>
+
 
 {% else %}
 {% include 'home_missing_session.html' %}
