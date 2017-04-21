@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
 from vendors.models import Vendor
-from product.models import Product
 from django.views.generic import DetailView
+
 
 class VendorForm(ModelForm):
     class Meta:
         model = Vendor
-        fields = ['name', 'website_address', 'contact_name', 'contact_email', 'contact_phone', 'physical_address_line_1', 'physical_address_line_2', 'physical_address_city', 'physical_address_state', 'physical_address_postal_code', 'physical_address_country', 'mailing_address_line_1', 'mailing_address_line_2', 'mailing_address_state', 'mailing_address_postal_code',
+        fields = ['name', 'website_address', 'contact_name', 'contact_email', 'contact_phone', 'physical_address_line_1', 'physical_address_line_2','physical_address_city', 'physical_address_state', 'physical_address_postal_code', 'physical_address_country', 'mailing_address_line_1', 'mailing_address_line_2', 'mailing_address_state', 'mailing_address_postal_code',
 'mailing_address_country', 'active']
 
 def vendor_list(request, template_name='vendors/vendor_list.html'):
@@ -107,3 +107,4 @@ def get_query(query_string, search_fields):
         else:
             query = query & or_query
     return query
+
