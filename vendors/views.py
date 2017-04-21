@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
-
 from vendors.models import Vendor
+from product.models import Product
 from django.views.generic import DetailView
 
 class VendorForm(ModelForm):
@@ -11,6 +11,20 @@ class VendorForm(ModelForm):
 'mailing_address_country', 'active']
 
 def vendor_list(request, template_name='vendors/vendor_list.html'):
+
+    # search if something was provided to search on
+    if ('q' in request.GET) and request.GET['q'].strip():
+        query_string = request.GET['q']
+        entry_query = get_query(query_string, VendorForm.Meta.fields) # I search on all fields.  Adjust as needed.
+        vendor = Vendor.objects.filter(entry_query)
+    else:
+        vendor = Vendor.objects.all()
+
+    data = {}
+    data['object_list'] = vendor
+    return render(request, template_name, data)
+
+def vendor_list_all(request, template_name='vendors/vendor_list_all.html'):
 
     # search if something was provided to search on
     if ('q' in request.GET) and request.GET['q'].strip():
@@ -44,6 +58,18 @@ def vendor_delete(request, pk, template_name='vendors/vendor_confirm_delete.html
     if request.method=='POST':
         vendor.delete()
         return redirect('vendor_list')
+    return render(request, template_name,{'object':vendor})
+
+def vendor_change(request, pk, template_name='vendors/vendor_confirm_change.html'):
+    vendor = get_object_or_404(Vendor, pk=pk)
+    if request.method=='POST':
+        if(vendor.active==1):
+            vendor.active=0
+            vendor.save()
+        else:
+            vendor.active = 1
+            vendor.save()
+        return redirect('vendor_list')
     return render(request, template_name, {'object':vendor})
 
 class VendorDetail(DetailView):
@@ -52,7 +78,7 @@ class VendorDetail(DetailView):
         object = super(VendorDetail, self).get_object()
         return object
 
-
+#Search Functionality
 import re
 from django.db.models import Q
 
