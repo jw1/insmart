@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
 from insmart_core.search import get_query
+from user_management.models import UserProfile
 
 class UserForm(ModelForm):
     class Meta:
@@ -44,6 +45,16 @@ def user_delete(request, pk, template_name='user_management/user_confirm_delete.
         user.delete()
         return redirect('user_list')
     return render(request, template_name, {'object':user})
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+
+@receiver(post_save, sender=User)
+def handle_new_job(sender, **kwargs):
+    user = kwargs.get('instance')
+    if hasattr(user,'userprofile') == False:
+        UserProfile.objects.get_or_create(user=user)
 
 #
 # This section here renders the list as a PDF, to fulfill the reporting

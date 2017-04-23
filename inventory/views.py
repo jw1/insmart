@@ -5,6 +5,7 @@ from product.models import Product
 from alert.models import Alert
 from django.views.generic import DetailView
 from insmart_core.search import get_query
+from insmart_core.mailer import send_alert_emails
 
 class AuditLogForm(forms.ModelForm):
     class Meta:
@@ -83,6 +84,9 @@ def generate_alert(product, audit_log):
     alert.maximum = product.maximum
     alert.current = audit_log.after
     alert.save()
+
+    # and notify as needed
+    send_alert_emails(alert)
 
 def audit_log_update(request, pk, template_name='inventory/auditlog_form.html'):
     audit_log = get_object_or_404(AuditLog, pk=pk)

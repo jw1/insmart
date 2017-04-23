@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from product.models import Product
 from django.views.generic import DetailView
 from insmart_core.search import get_query
+from insmart_core.mailer import send_alert_emails
 from inventory.models import AuditLog
 from alert.models import Alert
 
@@ -65,7 +66,7 @@ def product_update(request, pk, template_name='product/product_form.html'):
             generate_alert(product, request.user)
 
         return redirect('product_list')
-    
+
     return render(request, template_name, {'form':form})
 
 def is_alert_needed(product, before_save_minimum, before_save_maximum):
@@ -102,3 +103,6 @@ def generate_alert(product, user):
     alert.maximum = product.maximum
     alert.current = product.current
     alert.save()
+
+    # and notify as needed
+    send_alert_emails(alert)
