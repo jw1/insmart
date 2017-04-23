@@ -47,7 +47,7 @@
             <td>{{ audit_log.product.brand }}</td>
             <td>{{ audit_log.created_at }}</td>
             <td>{{ audit_log.user_id }}</td>
-            <td><a href="{% url "audit_log_detail" audit_log.id %}">View</a></td>
+            <td><a href="{% url "audit_log_detail" audit_log.id %}">{% bootstrap_icon "plus" %} View</a></td>
         </tr>
 
         {% endfor %}
@@ -55,7 +55,7 @@
     </table>
 </div>
 
-<a href="{% url "audit_log_new" %}">New</a>
+<a href="{% url "audit_log_new" %}">{% bootstrap_icon "plus" %} New</a>
 
 
 {% else %}

@@ -9,38 +9,22 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<body>
-<div class = "container">
-    <h1 class = "page-header">Alert Detail: {{ object.name }}</h1>
-    <table class ="table-bordered table-responsive table">
-        <tr>
-            <th class ="col-2">Product </th>
-            <td class = "col-4">{% object.product %}</td>
-        </tr>
-        <tr>
-            <th class ="col-2">Adjustment </th>
-            <td class = "col-4">{{ object.audit_log }}</td>
-        </tr>
 
-        <tr>
-            <th class ="col-2">Minimum </th>
-            <td class = "col-4">{{ object.minimum }}</td>
-        </tr>
-        <tr>
-            <th class ="col-2">Maximum </th>
-            <td class = "col-4">{{ object.maximum }}</td>
-        </tr>
-        <tr>
-            <th class ="col-2">Current Inventory </th>
-            <td class = "col-4">{{ object.current }}</td>
-        </tr>
-        <tr>
-            <th class ="col-2">Created At </th>
-            <td class = "col-4">{{ object.created_at }}</td>
-        </tr>
-    </table>
-</div>
-</body>
+<h1 class="page-header">Alert Details</h1>
+<p>Listed below are details specific to this particular product / inventory alert.</p>
+
+<table class ="table-striped table-responsive table">
+    <tr><th>Product </th>           <td>{{ object.product }}</td></tr>
+    <tr><th>Adjustment </th>        <td>{{ object.audit_log.adjustment }}</td></tr>
+    <tr><th>Minimum </th>           <td>{{ object.minimum }}</td></tr>
+    <tr><th>Maximum </th>           <td>{{ object.maximum }}</td></tr>
+    <tr><th>Current Inventory</th>  <td>{{ object.current }}</td></tr>
+    <tr><th>Created At </th>        <td>{{ object.created_at }}</td></tr>
+</table>
+
+<p class="text-justify">Inventory alerts are generated when inventory falls below or exceeds specified levels on a product, for the first time.  Multiple alerts will not be generated for the same product consecutively. </p>
+<p class="text-justify">For example, if inventory drops below the minimum threshold, an alert is generated.  If inventory continues to drop, no new inventory alerts shall be generated, until inventory levels rise above the minimum threshold.</p>
+
 {% else %}
 {% include 'home_missing_session.html' %}
 {% endif %}

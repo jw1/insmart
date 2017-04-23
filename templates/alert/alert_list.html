@@ -46,7 +46,7 @@
             <td>{{ alert.audit_log.adjustment }}</td>
             <td>{{ alert.current }}</td>
             <td>{{ alert.created_at }}</td>
-            <td><a href="{% url "alert_detail" alert.id %}">View</a></td>
+            <td><a href="{% url "alert_detail" alert.id %}">{% bootstrap_icon "zoom-in" %} View</a></td>
         </tr>
 
         {% endfor %}

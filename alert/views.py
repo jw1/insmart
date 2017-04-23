@@ -12,7 +12,7 @@ class AlertForm(forms.ModelForm):
         search_fields = ['product']
 
 class AlertDetail(DetailView):
-    queryset = AuditLog.objects.all()
+    queryset = Alert.objects.all()
     def get_object(self):
         object = super(AlertDetail, self).get_object()
         return object

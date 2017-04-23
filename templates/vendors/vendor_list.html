@@ -47,15 +47,15 @@
             <td>{{ vendor.contact_name }}</td>
             <td>{{ vendor.contact_email }}</td>
             <td>{{ vendor.contact_phone }}</td>
-            <td><a href="{% url "vendor_edit" vendor.id %}">Edit</a></td>
-            <td><a href="{% url "vendor_delete" vendor.id %}">Delete</a></td>
+            <td><a href="{% url "vendor_edit" vendor.id %}">{% bootstrap_icon "edit" %} Edit</a></td>
+            <td><a href="{% url "vendor_delete" vendor.id %}">{% bootstrap_icon "remove" %} Delete</a></td>
         </tr>
         {% endfor %}
         </tbody>
     </table>
 </div>
 
-<a href="{% url "vendor_new" %}">New</a>
+<a href="{% url "vendor_new" %}">{% bootstrap_icon "plus" %} New</a>
 
 
 {% else %}
