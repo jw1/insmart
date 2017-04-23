@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}InSmart{% endblock %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_superuser %}
+
+<h1 class="page-header">Inventory Alerts</h1>
+
+<form method="get" action="{% url "alert_list" %}">
+
+    <label for="id_q">Search:</label>
+    <input type="text" name="q" id="id_q"/>
+
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">
+        {% bootstrap_icon "search" %} Search
+    </button>
+    {% endbuttons %}
+</form>
+
+<div class = "table-responsive">
+    <table class = "table table-striped">
+        <thead>
+        <tr>
+            <th> ID # </th>
+            <th> Product </th>
+            <th> Adjustment </th>
+            <th> Inventory Level </th>
+            <th> Created At </th>
+            <th>  </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for alert in object_list %}
+
+        <tr class = "active">
+            <td>{{ alert.id }}</td>
+            <td>{{ alert.product }}</td>
+            <td>{{ alert.audit_log }}</td>
+            <td>{{ alert.current }}</td>
+            <td>{{ alert.created_at }}</td>
+            <td><a href="{% url "alert_detail" alert.id %}">View</a></td>
+        </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% else %}
+{% include 'home_missing_session.html' %}
+{% endif %}
+{% endblock %}

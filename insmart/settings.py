@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'axes',
     'user_management',
     'inventory',
+    'alert',
 ]
 
 MIDDLEWARE = [
