@@ -8,7 +8,7 @@
 {% load static %}
 
 {% block content %}
-{% if user.is_authenticated and user.is_superuser %}
+{% if user.is_authenticated %}
 
 <h1 class="page-header">Inventory Alerts</h1>
 
@@ -43,7 +43,7 @@
         <tr class = "active">
             <td>{{ alert.id }}</td>
             <td>{{ alert.product }}</td>
-            <td>{{ alert.audit_log }}</td>
+            <td>{{ alert.audit_log.adjustment }}</td>
             <td>{{ alert.current }}</td>
             <td>{{ alert.created_at }}</td>
             <td><a href="{% url "alert_detail" alert.id %}">View</a></td>

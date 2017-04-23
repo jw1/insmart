@@ -12,7 +12,7 @@ class Alert(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __str__(self):
-        return self.name
+        return self.product + ' ' + self.audit_log + ' ' + str(self.created_at)
 
     def get_absolute_url(self):
         return reverse('alert_edit', kwargs={'pk': self.pk})

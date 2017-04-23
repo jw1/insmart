@@ -14,7 +14,7 @@ class AuditLog(models.Model):
     memo = models.TextField(null=True)
 
     def __str__(self):
-        return self.name
+        return self.product.__str__() + ' ' + str(self.adjustment)
 
     def get_absolute_url(self):
         return reverse('audit_log_edit', kwargs={'pk': self.pk})
