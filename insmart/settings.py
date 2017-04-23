@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'user_management',
     'inventory',
     'alert',
+    'insmart_core',
 ]
 
 MIDDLEWARE = [
