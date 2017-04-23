@@ -8,7 +8,7 @@ class AlertForm(forms.ModelForm):
     class Meta:
         model = Alert
         fields = ['product', 'minimum', 'maximum', 'current']
-        search_fields = ['product']
+        search_fields = ['minimum', 'maximum', 'current']
 
 class AlertDetail(DetailView):
     queryset = Alert.objects.all()
