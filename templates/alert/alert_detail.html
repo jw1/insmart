@@ -15,11 +15,11 @@
     <table class ="table-bordered table-responsive table">
         <tr>
             <th class ="col-2">Product </th>
-            <td class = "col-4">{% object.product %}</td>
+            <td class = "col-4">{{ object.product }}</td>
         </tr>
         <tr>
             <th class ="col-2">Adjustment </th>
-            <td class = "col-4">{{ object.audit_log }}</td>
+            <td class = "col-4">{{ object.audit_log.adjustment }}</td>
         </tr>
 
         <tr>
