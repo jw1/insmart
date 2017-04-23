@@ -46,15 +46,15 @@
             <td>{{ user.first_name }}</td>
             <td>{{ user.last_name }}</td>
             <td>{{ user.email }}</td>
-            <td><a href="{% url "user_edit" user.id %}">Edit</a></td>
-            <td><a href="{% url "user_delete" user.id %}">Delete</a></td>
+            <td><a href="{% url "user_edit" user.id %}">{% bootstrap_icon "edit" %} Edit</a></td>
+            <td><a href="{% url "user_delete" user.id %}">{% bootstrap_icon "remove" %} Delete</a></td>
         </tr>
         {% endfor %}
         </tbody>
     </table>
 </div>
 
-<a href="{% url "user_new" %}">New</a>
+<a href="{% url "user_new" %}">{% bootstrap_icon "plus" %} New</a>
 
 
 {% else %}
