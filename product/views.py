@@ -55,21 +55,21 @@ def product_update(request, pk, template_name='product/product_form.html'):
     form = UpdateProductForm(request.POST or None, instance = product)
     if form.is_valid():
 
-        # Note the "pre-save" values so we can see if we generated an alert
+        # Note "pre-save" values so we can see if we generated an alert
         before_save_minimum = form.initial['minimum']
         before_save_maximum = form.initial['maximum']
 
         form.save()
 
-        # TODO:  Need to check here and see if the updated min / max settings will generate an alert.
-        #        But only if we were previously not in "alert territory"
         if (is_alert_needed(product, before_save_minimum, before_save_maximum)):
             generate_alert(product, request.user)
 
         return redirect('product_list')
+    
     return render(request, template_name, {'form':form})
 
 def is_alert_needed(product, before_save_minimum, before_save_maximum):
+    ''' True if modification put current inventory level out of bounds, False otherwise. '''
 
     # before it was okay, after update we're under the limit
     if before_save_minimum <= product.current < product.minimum:
@@ -82,6 +82,8 @@ def is_alert_needed(product, before_save_minimum, before_save_maximum):
     return False
 
 def generate_alert(product, user):
+    ''' Saves new audit_log and alert corresponding to the provided info '''
+
     # build an audit record to represent the product change
     audit = AuditLog()
     audit.product = product
