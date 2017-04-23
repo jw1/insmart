@@ -10,9 +10,9 @@
 {% block content %}
 {% if user.is_authenticated %}
 
-<h1 class="page-header">Inventory Tracking</h1>
+<h1 class="page-header">Inventory Alerts</h1>
 
-<form method="get" action="{% url "audit_log_list" %}">
+<form method="get" action="{% url "alert_list" %}">
 
     <label for="id_q">Search:</label>
     <input type="text" name="q" id="id_q"/>
@@ -29,34 +29,30 @@
         <thead>
         <tr>
             <th> ID # </th>
-            <th> Product ID # </th>
-            <th> Product Name </th>
-            <th> Product Brand </th>
-            <th> Adjusted At </th>
-            <th> Adjusted By </th>
+            <th> Product </th>
+            <th> Adjustment </th>
+            <th> Inventory Level </th>
+            <th> Created At </th>
             <th>  </th>
         </tr>
         </thead>
         <tbody>
-        {% for audit_log in object_list %}
+
+        {% for alert in object_list %}
 
         <tr class = "active">
-            <td>{{ audit_log.id }}</td>
-            <td>{{ audit_log.product.id }}</td>
-            <td>{{ audit_log.product.name }}</td>
-            <td>{{ audit_log.product.brand }}</td>
-            <td>{{ audit_log.created_at }}</td>
-            <td>{{ audit_log.user_id }}</td>
-            <td><a href="{% url "audit_log_detail" audit_log.id %}">View</a></td>
+            <td>{{ alert.id }}</td>
+            <td>{{ alert.product }}</td>
+            <td>{{ alert.audit_log.adjustment }}</td>
+            <td>{{ alert.current }}</td>
+            <td>{{ alert.created_at }}</td>
+            <td><a href="{% url "alert_detail" alert.id %}">View</a></td>
         </tr>
 
         {% endfor %}
         </tbody>
     </table>
 </div>
-
-<a href="{% url "audit_log_new" %}">New</a>
-
 
 {% else %}
 {% include 'home_missing_session.html' %}

@@ -2,6 +2,7 @@ from django import forms
 from django.shortcuts import render, redirect, get_object_or_404
 from inventory.models import AuditLog
 from product.models import Product
+from alert.models import Alert
 from django.views.generic import DetailView
 
 class AuditLogForm(forms.ModelForm):
@@ -39,35 +40,48 @@ def audit_log_create(request, template_name = 'inventory/auditlog_form.html'):
     if form.is_valid():
         # 2-step save.  Can't commit until the calculated fields are set.
         form_to_save = form.save(commit=False)
-
-        current = form.cleaned_data['product'].current
+        product = form.cleaned_data['product']
+        current = product.current
         adjustment = form.cleaned_data['adjustment']
-
         form_to_save.before = current
         form_to_save.after = current + adjustment
-
         form_to_save.save()
 
-        # TODO:  if the adjustment was made, then see if alert needs to be made.
+        # go adjust the inventory level on the product
+        adjust_product_inventory(product.id, current + adjustment)
+
+        # did that inventory adjustment trigger an alert?
+        if (is_alert_needed(product, form_to_save)):
+            generate_alert(product, form_to_save)
 
         return redirect('audit_log_list')
 
     return render(request, template_name, {'form':form})
 
-def clean_before(self):
-    current = self.cleaned_data['product'].current
-    print(current)
-    #adjustment = self.cleaned_data['adjustment']
-    #print('vals')
-    #print(current)
-    #print(adjustment)
+def adjust_product_inventory(product_id, new_count):
+    product = Product.objects.filter(id = product_id).first()
+    product.current = new_count
+    Product.save(product)
 
-    #form.before = current
-    #form.after = current + adjustment
 
-    #form.cleaned_data['before'] = current
-    #form.cleaned_data['after'] = current + adjustment
-    return current
+def is_alert_needed(product, audit_log):
+
+    if (audit_log.before > product.minimum and audit_log.after < product.minimum):
+        return True
+
+    if (audit_log.before < product.maximum and audit_log.after > product.maximum):
+        return True
+
+    return False
+
+def generate_alert(product, audit_log):
+    alert = Alert()
+    alert.product = product
+    alert.audit_log = audit_log
+    alert.minimum = product.minimum
+    alert.maximum = product.maximum
+    alert.current = audit_log.after
+    alert.save()
 
 def audit_log_update(request, pk, template_name='inventory/auditlog_form.html'):
     audit_log = get_object_or_404(AuditLog, pk=pk)
