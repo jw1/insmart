@@ -18,3 +18,9 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('product_edit', kwargs={'pk': self.pk})
+
+    #Deletes should only make an object inactive so as not to break inventory opns.
+    def delete(self, using=None, keep_parents=False):
+        self.active = False
+        self.save()
+        return self

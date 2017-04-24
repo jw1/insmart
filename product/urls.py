@@ -20,5 +20,9 @@ urlpatterns = [
 
     url(r'^detail/(?P<pk>\d+)$',
         views.ProductDetail.as_view(),
-        name='product_detail')
+        name='product_detail'),
+
+    url(r'^list_all$',
+        views.product_list_all,
+        name='product_list_all'),
     ]

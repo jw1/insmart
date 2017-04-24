@@ -12,9 +12,11 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = ['vendors', 'name', 'description', 'brand',
               'minimum', 'maximum', 'current', 'active']
+        # search fields can't include m2m relationships-omitted vendors field
         search_fields = ['name', 'description', 'brand',
               'minimum', 'maximum', 'current', 'active']
 
+#This form disables current field adjustment to allow for management at inventory app
 class UpdateProductForm(ProductForm):
     current = forms.CharField(disabled=True)
 
@@ -26,6 +28,18 @@ class ProductDetail(DetailView):
 
 
 def product_list(request, template_name = 'product/product_list.html'):
+    # search if something was provided to search on
+    if ('q' in request.GET) and request.GET['q'].strip():
+        query_string = request.GET['q']
+        entry_query = get_query(query_string, ProductForm.Meta.search_fields) # I search all product fields.  Adjust as needed.
+        product = Product.objects.filter(entry_query).filter(active=True)
+    else:
+        product = Product.objects.filter(active=True)
+    data = {}
+    data['object_list'] = product
+    return render(request, template_name, data)
+
+def product_list_all(request, template_name = 'product/product_list_all.html'):
     # search if something was provided to search on
     if ('q' in request.GET) and request.GET['q'].strip():
         query_string = request.GET['q']
@@ -47,6 +61,7 @@ def product_create(request, template_name = 'product/product_form.html'):
 def product_delete(request, pk, template_name='product/product_confirm_delete.html'):
     product = get_object_or_404(Product, pk=pk)
     if request.method=='POST':
+        #note deletes only set products to inactive state.
         product.delete()
         return redirect('product_list')
     return render(request, template_name, {'object':product})
