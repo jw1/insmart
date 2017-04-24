@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}InSmart{% endblock %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_superuser %}
+<form method="post">{% csrf_token %}
+    {% if vendor.active == 1 %}
+    Are you sure you want to disable? "{{ object }}" ?
+    {% else %}
+    Are you sure you want to enable? "{{ object }}" ?
+    <input type="submit" value="Submit" />
+    {% endif %}
+</form>
+
+
+{% else %}
+{% include 'home_missing_session.html' %}
+{% endif %}
+{% endblock %}

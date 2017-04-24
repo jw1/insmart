@@ -1,4 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}InSmart{% endblock %}
+
+{ % load bootstrap3 %}
+{ % bootstrap_css % }
+{ % boostrap_javascript % }
+
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated %}
 <form method="post">{% csrf_token %}
-    Are you sure you want to delete "{{ object }}" ?
+    Are you sure you want to delete "{{ object }}" and remove "{{ object }}" from all products?
+
     <input type="submit" value="Submit" />
 </form>
+
+
+{% else %}
+{% include 'home_missing_session.html' %}
+{% endif %}
+{% endblock %}
