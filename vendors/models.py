@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.urlresolvers import reverse
+#from product.models import Product
 from django.core.validators import validate_email, URLValidator
 #from polls.models import Vendor
 # Create your models here.

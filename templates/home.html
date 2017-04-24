@@ -23,108 +23,78 @@ It will need to be replaced with "alert" content someday.
 
 <h1 class="page-header">Dashboard</h1>
 
-<p>Below is some of the template junk from the dashboard template at getbootstrap.com.  Should provide a few ideas on how to render certain things</p>
-<p>See the base.html file for how to do images and other static content.  </p>
+<p class="text-justify">Welcome to InSmart!  Use the links on the left side of the page to manage different types of information in the application.  The links at the top of the screen are user-specific links.</p>
+<p class="text-justify">Listed below are any inventory alerts which may require attention.</p>
 
-<div class="row placeholders">
-    <div class="col-xs-6 col-sm-3 placeholder">
-        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-             width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-        <h4>Label</h4>
-        <span class="text-muted">Something else</span>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder">
-        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-             width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-        <h4>Label</h4>
-        <span class="text-muted">Something else</span>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder">
-        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-             width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-        <h4>Label</h4>
-        <span class="text-muted">Something else</span>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder">
-        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-             width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-        <h4>Label</h4>
-        <span class="text-muted">Something else</span>
-    </div>
-</div>
 
-<h2 class="sub-header">Section title</h2>
-<div class="table-responsive">
-    <table class="table table-striped">
+<h2>Today's Inventory Alerts</h2>
+{% if today_count > 0 %}
+<div class = "table-responsive">
+    <table class = "table table-striped">
         <thead>
         <tr>
-            <th>#</th>
-            <th>Header</th>
-            <th>Header</th>
-            <th>Header</th>
-            <th>Header</th>
+            <th>ID #</th>
+            <th>Product</th>
+            <th>Adjustment</th>
+            <th>Inventory Level</th>
+            <th>Created At</th>
+            <th/>
         </tr>
         </thead>
+
         <tbody>
-        <tr>
-            <td>1,001</td>
-            <td>Lorem</td>
-            <td>ipsum</td>
-            <td>dolor</td>
-            <td>sit</td>
+        {% for alert in today %}
+        <tr class = "active">
+            <td>{{ alert.id }}</td>
+            <td>{{ alert.product }}</td>
+            <td>{{ alert.audit_log.adjustment }}</td>
+            <td>{{ alert.current }}</td>
+            <td>{{ alert.created_at }}</td>
+            <td><a href="{% url "alert_detail" alert.id %}">{% bootstrap_icon "zoom-in" %} View</a></td>
         </tr>
-        <tr>
-            <td>1,002</td>
-            <td>amet</td>
-            <td>consectetur</td>
-            <td>adipiscing</td>
-            <td>elit</td>
-        </tr>
-        <tr>
-            <td>1,003</td>
-            <td>Integer</td>
-            <td>nec</td>
-            <td>odio</td>
-            <td>Praesent</td>
-        </tr>
-        <tr>
-            <td>1,003</td>
-            <td>libero</td>
-            <td>Sed</td>
-            <td>cursus</td>
-            <td>ante</td>
-        </tr>
-        <tr>
-            <td>1,004</td>
-            <td>dapibus</td>
-            <td>diam</td>
-            <td>Sed</td>
-            <td>nisi</td>
-        </tr>
-        <tr>
-            <td>1,005</td>
-            <td>Nulla</td>
-            <td>quis</td>
-            <td>sem</td>
-            <td>at</td>
-        </tr>
-        <tr>
-            <td>1,006</td>
-            <td>nibh</td>
-            <td>elementum</td>
-            <td>imperdiet</td>
-            <td>Duis</td>
-        </tr>
-        <tr>
-            <td>1,007</td>
-            <td>sagittis</td>
-            <td>ipsum</td>
-            <td>Praesent</td>
-            <td>mauris</td>
-        </tr>
+        {% endfor %}
         </tbody>
     </table>
 </div>
+{% else %}
+<p>No alerts have been generated today!</p>
+{% endif %}
+
+<h2>Older Alerts</h2>
+{% if older_count > 0 %}
+<div class = "table-responsive">
+    <table class = "table table-striped">
+        <thead>
+        <tr>
+            <th>ID #</th>
+            <th>Product</th>
+            <th>Adjustment</th>
+            <th>Inventory Level</th>
+            <th>Created At</th>
+            <th/>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for alert in older %}
+
+        <tr class = "active">
+            <td>{{ alert.id }}</td>
+            <td>{{ alert.product }}</td>
+            <td>{{ alert.audit_log.adjustment }}</td>
+            <td>{{ alert.current }}</td>
+            <td>{{ alert.created_at }}</td>
+            <td><a href="{% url "alert_detail" alert.id %}">{% bootstrap_icon "zoom-in" %} View</a></td>
+        </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p>There are no inventory alerts older than today!</p>
+{% endif %}
+
 
 {% else %}
 {% include 'home_missing_session.html' %}

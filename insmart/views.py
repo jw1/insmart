@@ -3,9 +3,28 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
+from alert.models import Alert
+from datetime import date
 
 def index(request):
     return HttpResponse("Hello")
+
+# the home page shall show alerts
+def home(request):
+    today = Alert.objects.filter(created_at__gte=date.today()).order_by('-created_at')
+    today_count = len(today)
+    older = Alert.objects.filter(created_at__lt=date.today()).order_by('-created_at')[:25]
+    older_count = len(older)
+
+    data = {}
+    data['today'] = today
+    data['today_count'] = today_count
+    data['older'] = older
+    data['older_count'] = older_count
+
+    return render(request=request, template_name='home.html', context=data)
+
+
 
 # https://simpleisbetterthancomplex.com/tips/2016/08/04/django-tip-9-password-change-form.html
 def change_password(request):

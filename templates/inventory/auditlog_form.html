@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}InSmart{% endblock %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% load static %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<body>
+
+<h1 class="page-header">New Audit Log</h1>
+<form method="post">
+
+    {% csrf_token %}
+
+    {% for field in form %}
+
+    <div class="fieldWrapper">
+        {{ field.errors }}
+
+        {{ field.label_tag }} {{ field }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+
+    {% endfor %}
+
+
+
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">
+        {% bootstrap_icon "check" %} Save
+    </button>
+    {% endbuttons %}
+
+</form>
+</body>
+
+{% else %}
+{% include 'home_missing_session.html' %}
+{% endif %}
+{% endblock %}

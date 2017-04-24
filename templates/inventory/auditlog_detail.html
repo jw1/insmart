@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}InSmart{% endblock %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% load static %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+
+<h1 class = "page-header">Inventory Adjustment Details</h1>
+<p>Listed below are details specific to this product inventory adjustment.</p>
+
+<table class ="table-striped table-responsive table">
+    <tr><th>Product </th>           <td>{{ object.product }}</td></tr>
+    <tr><th>Before </th>            <td>{{ object.before }}</td></tr>
+    <tr><th>After </th>             <td>{{ object.after }}</td></tr>
+    <tr><th>Adjustment Amount</th>  <td>{{ object.adjustment }}</td></tr>
+    <tr><th>User </th>              <td>{{ object.user_id }}</td></tr>
+    <tr><th>Created At </th>        <td>{{ object.created_at }}</td></tr>
+    <tr><th>Memo </th>              <td class="text-justify">{{ object.memo }}</td></tr>
+</table>
+
+<p class="text-justify">Inventory adjustments can be made for a variety of reasons.  Additionally, these adjustments can be either positive or negative.</p>
+<p class="text-justify">For example, when a shipment is received from a vendor, a positive inventory adjustment should be made.  When a product is sold, lost, or stolen, a negative inventory adjustment should be made.</p>
+
+{% else %}
+{% include 'home_missing_session.html' %}
+{% endif %}
+{% endblock %}

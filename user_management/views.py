@@ -1,12 +1,8 @@
-from django.http import HttpResponse
-from django.views.generic import TemplateView, ListView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.core.urlresolvers import reverse_lazy
-
 from django.contrib.auth.models import User
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
+from insmart_core.search import get_query
+from user_management.models import UserProfile
 
 class UserForm(ModelForm):
     class Meta:
@@ -49,6 +45,16 @@ def user_delete(request, pk, template_name='user_management/user_confirm_delete.
         user.delete()
         return redirect('user_list')
     return render(request, template_name, {'object':user})
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+
+@receiver(post_save, sender=User)
+def handle_new_job(sender, **kwargs):
+    user = kwargs.get('instance')
+    if hasattr(user,'userprofile') == False:
+        UserProfile.objects.get_or_create(user=user)
 
 #
 # This section here renders the list as a PDF, to fulfill the reporting
@@ -94,35 +100,3 @@ def user_list_as_pdf(request):
     p.showPage()
     p.save()
     return response
-
-
-
-# quick and dirty search impl here
-import re
-from django.db.models import Q
-
-def normalize_query(query_string,
-                    findterms=re.compile(r'"([^"]+)"|(\S+)').findall,
-                    normspace=re.compile(r'\s{2,}').sub):
-    return [normspace(' ', (t[0] or t[1]).strip()) for t in findterms(query_string)]
-
-
-def get_query(query_string, search_fields):
-
-    ''' Returns a query, that is a combination of Q objects. That combination aims to search keywords within a model by testing the given search fields. '''
-
-    query = None  # Query to search for every search term
-    terms = normalize_query(query_string)
-    for term in terms:
-        or_query = None  # Query to search for a given term in each field
-        for field_name in search_fields:
-            q = Q(**{"%s__icontains" % field_name: term})
-            if or_query is None:
-                or_query = q
-            else:
-                or_query = or_query | q
-        if query is None:
-            query = or_query
-        else:
-            query = query & or_query
-    return query

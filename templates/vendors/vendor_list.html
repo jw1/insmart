@@ -8,7 +8,7 @@
 {% load static %}
 
 {% block content %}
-{% if user.is_authenticated and user.is_superuser %}
+{% if user.is_authenticated %}
 
 <h1 class="page-header">Vendors</h1>
 
@@ -49,8 +49,8 @@
             <td>{{ vendor.contact_name }}</td>
             <td>{{ vendor.contact_email }}</td>
             <td>{{ vendor.contact_phone }}</td>
-            <td><a href="{% url "vendor_edit" vendor.id %}">Edit</a></td>
-            <td><a href="{% url "vendor_change" vendor.id %}">Disable</a></td>
+            <td><a href="{% url "vendor_edit" vendor.id %}">{% bootstrap_icon "edit" %} Edit</a></td>
+            <td><a href="{% url "vendor_change" vendor.id %}"> Disable</a></td>
         </tr>
         {% endif %}
         {% endfor %}
@@ -58,7 +58,7 @@
     </table>
 </div>
 
-<a href="{% url "vendor_new" %}">New</a>
+<a href="{% url "vendor_new" %}">{% bootstrap_icon "plus" %} New</a>
 <a href="{% url "vendor_list_all" %}">All Vendors</a>
 
 

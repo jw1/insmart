@@ -1,16 +1,29 @@
 {% extends 'base.html' %}
 {% block title %}InSmart{% endblock %}
 
-{ % load bootstrap3 %}
-{ % bootstrap_css % }
-{ % boostrap_javascript % }
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
 {% load static %}
 
 {% block content %}
 {% if user.is_authenticated %}
-<body>
+
 <h1 class="page-header">Products<small> Manage your Products</small></h1>
+
+<form method="get" action="{% url "product_list" %}">
+
+    <label for="id_q">Search:</label>
+    <input type="text" name="q" id="id_q"/>
+
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">
+        {% bootstrap_icon "search" %} Search
+    </button>
+    {% endbuttons %}
+</form>
+
 <div class = "table-responsive">
     <table class = "table table-striped">
         <thead>
@@ -27,15 +40,15 @@
             <td>{{ product.id }}</td>
             <td><a href = "{% url "product_detail" product.id %}">{{ product.name }}</a></td>
             <td>{{ product.brand }}</td>
-            <td><a href="{% url "product_edit" product.id %}">edit</a></td>
-            <td><a href="{% url "product_delete" product.id %}">delete</a></td>
+            <td><a href="{% url "product_edit" product.id %}">{% bootstrap_icon "edit" %} Edit</a></td>
+            <td><a href="{% url "product_delete" product.id %}">{% bootstrap_icon "remove" %} Delete</a></td>
             {% else %}
         <tr>
             <td><p class = "text-muted">{{ product.active|yesno:"Active,Inactive" }}</p></td>
             <td><p class = "text-muted"><a href = "{% url "product_detail" product.id %}">{{ product.name }}</a></p></td>
             <td><p class = "text-muted">{{ product.brand }}</p></td>
-            <td><a href="{% url "product_edit" product.id %}">edit</a></td>
-            <td><a href="{% url "product_delete" product.id %}">delete</a></td>
+            <td><a href="{% url "product_edit" product.id %}">{% bootstrap_icon "edit" %} Edit</a></td>
+            <td><a href="{% url "product_delete" product.id %}">{% bootstrap_icon "remove" %} Delete</a></td>
             {% endif %}
 
 
@@ -47,8 +60,8 @@
     </table>
 </div>
 
-<a href="{% url "product_new" %}">New</a>
-</body>
+<a href="{% url "product_new" %}">{% bootstrap_icon "plus" %} New</a>
+
 
 {% else %}
 {% include 'home_missing_session.html' %}

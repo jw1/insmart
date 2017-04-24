@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'product',
     'axes',
     'user_management',
+    'inventory',
+    'alert',
+    'insmart_core',
 ]
 
 MIDDLEWARE = [

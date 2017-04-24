@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}InSmart{% endblock %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% load static %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<h1 class="page-header">Alert Details</h1>
+<p>Listed below are details specific to this particular product / inventory alert.</p>
+
+<table class ="table-striped table-responsive table">
+    <tr><th>Product </th>           <td>{{ object.product }}</td></tr>
+    <tr><th>Adjustment </th>        <td>{{ object.audit_log.adjustment }}</td></tr>
+    <tr><th>Minimum </th>           <td>{{ object.minimum }}</td></tr>
+    <tr><th>Maximum </th>           <td>{{ object.maximum }}</td></tr>
+    <tr><th>Current Inventory</th>  <td>{{ object.current }}</td></tr>
+    <tr><th>Created At </th>        <td>{{ object.created_at }}</td></tr>
+</table>
+
+<p class="text-justify">Inventory alerts are generated when inventory falls below or exceeds specified levels on a product, for the first time.  Multiple alerts will not be generated for the same product consecutively. </p>
+<p class="text-justify">For example, if inventory drops below the minimum threshold, an alert is generated.  If inventory continues to drop, no new inventory alerts shall be generated, until inventory levels rise above the minimum threshold.</p>
+
+{% else %}
+{% include 'home_missing_session.html' %}
+{% endif %}
+{% endblock %}

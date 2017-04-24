@@ -6,15 +6,15 @@
         <li><a href="{% url 'product_list' %}">Products</a></li>
         <li><a href="{% url 'reports' %}">Reports</a></li>
     </ul>
+
     <ul class="nav nav-sidebar">
-        {% if user.is_authenticated and user.is_superuser %} <!-- Only the supers should do this -->
+        <li><a href="{% url 'audit_log_list' %}">Inventory Tracking</a></li>
+        <li><a href="{% url 'alert_list' %}">Alerts</a></li>
+    </ul>
+
+    {% if user.is_authenticated and user.is_superuser %}
+    <ul class="nav nav-sidebar">
         <li><a href="{% url 'user_list' %}">Users</a></li>
-        {% endif %}
-        <li><a href="">Nav item again</a></li>
-        <li><a href="">One more nav</a></li>
     </ul>
-    <ul class="nav nav-sidebar">
-        <li><a href="">Nav item again</a></li>
-        <li><a href="">One more nav</a></li>
-    </ul>
+    {% endif %}
 </div>

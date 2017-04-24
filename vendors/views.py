@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
 from vendors.models import Vendor
 from django.views.generic import DetailView
+from insmart_core.search import get_query
 
 
 class VendorForm(ModelForm):
