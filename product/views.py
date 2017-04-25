@@ -7,6 +7,7 @@ from insmart_core.mailer import send_alert_emails
 from inventory.models import AuditLog
 from alert.models import Alert
 
+
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
@@ -55,6 +56,10 @@ class ProductDetail(DetailView):
     def get_object(self):
         object = super(ProductDetail, self).get_object()
         return object
+
+
+
+
 
 
 def product_list(request, template_name = 'product/product_list.html'):

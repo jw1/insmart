@@ -9,6 +9,7 @@
 
 {% block content %}
 {% if user.is_authenticated and user.is_superuser %}
+{% load pagination_tags %}
 
 <h1 class="page-header">Users</h1>
 
@@ -26,6 +27,8 @@
 </form>
 
 <div class="table-responsive">
+    {% autopaginate object_list 10 %}
+        {% paginate %}
     <table class="table table-striped">
         <thead>
         <tr>

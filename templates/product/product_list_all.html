@@ -9,6 +9,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+{% load pagination_tags %}
 
 <h1 class="page-header">Products<small> Manage your Products</small></h1>
 
@@ -25,6 +26,8 @@
 </form>
 
 <div class = "table-responsive">
+    {% autopaginate object_list 10 %}
+        {% paginate %}
     <table class = "table table-striped">
         <thead>
         <tr>
