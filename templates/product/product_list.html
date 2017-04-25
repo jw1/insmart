@@ -29,6 +29,7 @@
         <thead>
         <tr>
             <th> ID # </th>
+            <th> Vendor </th>
             <th> Name </th>
             <th> Brand </th>
         </tr>
@@ -38,6 +39,7 @@
         {% if product.active == 1 %}
         <tr class = "active">
             <td>{{ product.id }}</td>
+            <td>{% for vendor in product.vendors.all %}{{ vendor }}{% endfor %}</td>
             <td><a href = "{% url "product_detail" product.id %}">{{ product.name }}</a></td>
             <td>{{ product.brand }}</td>
             <td><a href="{% url "product_edit" product.id %}">{% bootstrap_icon "edit" %} Edit</a></td>

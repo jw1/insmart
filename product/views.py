@@ -16,9 +16,39 @@ class ProductForm(forms.ModelForm):
         search_fields = ['name', 'description', 'brand',
               'minimum', 'maximum', 'current', 'active']
 
-#This form disables current field adjustment to allow for management at inventory app
+
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        vendor = cleaned_data.get('vendors')
+        name = cleaned_data.get('name')
+        brand = cleaned_data.get('brand')
+        minimum = cleaned_data.get('minimum')
+        maximum = cleaned_data.get('maximum')
+        current = cleaned_data.get('current')
+        # ensure no duplicates on vendors, name, and brands (different vendors maybe offer the same products)
+        # but a vendor can't have two of the same product to sell.
+
+        if Product.objects.filter(vendors = vendor, name = name, brand = brand).exclude(pk = self.instance.id).exists():
+            del name
+            del brand
+            raise forms.ValidationError('This product is already defined for this vendor')
+
+        if minimum > maximum:
+            raise forms.ValidationError('Please either adjust your upper or lower limits')
+
+        # had to convert current to int because it came as a string in this if argument
+        # no clue why
+
+        if minimum < 0 or maximum < 0 or int(current) < 0:
+            del maximum
+            del minimum
+            raise  forms.ValidationError('Please use values between 0 and 2147483647')
+        return cleaned_data
+
+# This form disables current field adjustment to allow for management at inventory app
 class UpdateProductForm(ProductForm):
     current = forms.CharField(disabled=True)
+
 
 class ProductDetail(DetailView):
     queryset = Product.objects.all()
