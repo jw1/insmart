@@ -16,9 +16,9 @@ def user_list(request, template_name='user_management/user_list.html'):
     if ('q' in request.GET) and request.GET['q'].strip():
         query_string = request.GET['q']
         entry_query = get_query(query_string, UserForm.Meta.fields) # I search on all fields.  Adjust as needed.
-        users = User.objects.filter(entry_query)
+        users = User.objects.filter(entry_query).order_by('username')
     else:
-        users = User.objects.all()
+        users = User.objects.all().order_by('username')
 
     data = {}
     data['object_list'] = users

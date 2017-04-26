@@ -67,9 +67,9 @@ def product_list(request, template_name = 'product/product_list.html'):
     if ('q' in request.GET) and request.GET['q'].strip():
         query_string = request.GET['q']
         entry_query = get_query(query_string, ProductForm.Meta.search_fields) # I search all product fields.  Adjust as needed.
-        product = Product.objects.filter(entry_query).filter(active=True)
+        product = Product.objects.filter(entry_query).filter(active=True).order_by('name')
     else:
-        product = Product.objects.filter(active=True)
+        product = Product.objects.filter(active=True).order_by('name')
     data = {}
     data['object_list'] = product
     return render(request, template_name, data)
@@ -79,9 +79,9 @@ def product_list_all(request, template_name = 'product/product_list_all.html'):
     if ('q' in request.GET) and request.GET['q'].strip():
         query_string = request.GET['q']
         entry_query = get_query(query_string, ProductForm.Meta.search_fields) # I search all product fields.  Adjust as needed.
-        product = Product.objects.filter(entry_query)
+        product = Product.objects.filter(entry_query).order_by('name')
     else:
-        product = Product.objects.all()
+        product = Product.objects.all().order_by('name')
     data = {}
     data['object_list'] = product
     return render(request, template_name, data)
