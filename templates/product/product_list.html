@@ -9,6 +9,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+{% load pagination_tags %}
 
 <h1 class="page-header">Products<small> Manage your Products</small></h1>
 
@@ -24,7 +25,10 @@
     {% endbuttons %}
 </form>
 
+
 <div class = "table-responsive">
+    {% autopaginate object_list 10 %}
+        {% paginate %}
     <table class = "table table-striped">
         <thead>
         <tr>
@@ -52,6 +56,10 @@
         </tbody>
     </table>
 </div>
+
+
+
+
 
 <a href="{% url "product_new" %}">{% bootstrap_icon "plus" %} New</a>
 <a href="{% url "product_list_all" %}">{% bootstrap_icon "expand" %}Show Inactive Products</a>
