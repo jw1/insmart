@@ -17,9 +17,9 @@ def vendor_list(request, template_name='vendors/vendor_list.html'):
     if ('q' in request.GET) and request.GET['q'].strip():
         query_string = request.GET['q']
         entry_query = get_query(query_string, VendorForm.Meta.fields) # I search on all fields.  Adjust as needed.
-        vendor = Vendor.objects.filter(entry_query)
+        vendor = Vendor.objects.filter(entry_query).order_by('name')
     else:
-        vendor = Vendor.objects.all()
+        vendor = Vendor.objects.all().order_by('name')
 
     data = {}
     data['object_list'] = vendor
@@ -31,9 +31,9 @@ def vendor_list_all(request, template_name='vendors/vendor_list_all.html'):
     if ('q' in request.GET) and request.GET['q'].strip():
         query_string = request.GET['q']
         entry_query = get_query(query_string, VendorForm.Meta.fields) # I search on all fields.  Adjust as needed.
-        vendor = Vendor.objects.filter(entry_query)
+        vendor = Vendor.objects.filter(entry_query).order_by('name')
     else:
-        vendor = Vendor.objects.all()
+        vendor = Vendor.objects.all().order_by('name')
 
     data = {}
     data['object_list'] = vendor
