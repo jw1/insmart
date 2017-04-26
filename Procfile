@@ -1,0 +1,1 @@
+web: gunicorn insmart.wsgi --log-file -

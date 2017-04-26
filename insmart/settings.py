@@ -147,7 +147,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'box797.bluehost.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'insmart@jameswarlick.com'
-EMAIL_HOST_PASSWORD = 'zNDJBuCFSyb;4'
+EMAIL_HOST_PASSWORD = 'zNDJBuCFSyb;4zz'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'insmart@jameswarlick.com'
 
