@@ -53,20 +53,21 @@
             <td>{{ vendor.contact_email }}</td>
             <td>{{ vendor.contact_phone }}</td>
             <td>{{ vendor.active }}</td>
-            <td><a href="{% url "vendor_edit" vendor.id %}">Edit</a></td>
+            <td><a href="{% url "vendor_edit" vendor.id %}">{% bootstrap_icon "cog" %}Edit</a></td>
             {% if vendor.active == 1 %}
-            <td><a href="{% url "vendor_change" vendor.id %}">Disable</a></td>
+            <td><a href="{% url "vendor_change" vendor.id %}">{% bootstrap_icon "minus" %}Disable</a></td>
             {% else %}
-            <td><a href="{% url "vendor_change" vendor.id %}">Enable</a></td>
+            <td><a href="{% url "vendor_change" vendor.id %}">{% bootstrap_icon "plus" %}Enable</a></td>
             {% endif %}
-            <td><a href="{% url "vendor_delete" vendor.id %}">Delete</a></td>
+            <td><a href="{% url "vendor_delete" vendor.id %}">{% bootstrap_icon "trash" %}Delete</a></td>
         </tr>
         {% endfor %}
         </tbody>
     </table>
 </div>
 
-<a href="{% url "vendor_new" %}">New</a> <a href="{% url "vendor_list" %}">Active Vendors</a>
+<a href="{% url "vendor_new" %}">{% bootstrap_icon "plus" %} New </a>
+<a href="{% url "vendor_list" %}">{% bootstrap_icon "collapse-down" %} Active Vendors</a>
 
 
 {% else %}

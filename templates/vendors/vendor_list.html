@@ -52,8 +52,8 @@
             <td>{{ vendor.contact_name }}</td>
             <td>{{ vendor.contact_email }}</td>
             <td>{{ vendor.contact_phone }}</td>
-            <td><a href="{% url "vendor_edit" vendor.id %}">{% bootstrap_icon "edit" %} Edit</a></td>
-            <td><a href="{% url "vendor_change" vendor.id %}"> Disable</a></td>
+            <td><a href="{% url "vendor_edit" vendor.id %}">{% bootstrap_icon "cog" %} Edit</a></td>
+            <td><a href="{% url "vendor_change" vendor.id %}">{% bootstrap_icon "minus" %} Disable</a></td>
         </tr>
         {% endif %}
         {% endfor %}
@@ -61,8 +61,8 @@
     </table>
 </div>
 
-<a href="{% url "vendor_new" %}">{% bootstrap_icon "plus" %} New</a>
-<a href="{% url "vendor_list_all" %}">All Vendors</a>
+<a href="{% url "vendor_new" %}">{% bootstrap_icon "plus" %} New </a>
+<a href="{% url "vendor_list_all" %}">{% bootstrap_icon "expand" %} All Vendors</a>
 
 
 {% else %}
