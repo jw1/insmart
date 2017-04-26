@@ -6,6 +6,7 @@ from alert.models import Alert
 from django.views.generic import DetailView
 from insmart_core.search import get_query
 from insmart_core.mailer import send_alert_emails
+from django.db import transaction
 
 class AuditLogForm(forms.ModelForm):
     class Meta:
@@ -36,6 +37,7 @@ def audit_log_list(request, template_name = 'inventory/auditlog_list.html'):
     data['object_list'] = result_set
     return render(request, template_name, data)
 
+@transaction.atomic
 def audit_log_create(request, template_name = 'inventory/auditlog_form.html'):
     form = AuditLogForm(request.POST or None)
 

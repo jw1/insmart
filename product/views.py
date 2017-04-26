@@ -6,7 +6,7 @@ from insmart_core.search import get_query
 from insmart_core.mailer import send_alert_emails
 from inventory.models import AuditLog
 from alert.models import Alert
-
+from django.db import transaction
 
 class ProductForm(forms.ModelForm):
     class Meta:
@@ -101,6 +101,7 @@ def product_delete(request, pk, template_name='product/product_confirm_delete.ht
         return redirect('product_list')
     return render(request, template_name, {'object':product})
 
+@transaction.atomic
 def product_update(request, pk, template_name='product/product_form.html'):
     product = get_object_or_404(Product, pk=pk)
     form = UpdateProductForm(request.POST or None, instance = product)
