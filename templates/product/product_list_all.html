@@ -42,7 +42,7 @@
             <td>{{ product.id }}</td>
             <td><a href = "{% url "product_detail" product.id %}">{{ product.name }}</a></td>
             <td>{{ product.brand }}</td>
-            <td><a href="{% url "product_edit" product.id %}">{% bootstrap_icon "edit" %} Edit</a></td>
+            <td><a href="{% url "product_edit" product.id %}">{% bootstrap_icon "cog" %} Edit</a></td>
         </tr>
 
         {% endfor %}
@@ -50,7 +50,7 @@
     </table>
 </div>
 
-<a href="{% url "product_new" %}">{% bootstrap_icon "plus" %} New</a>
+<a href="{% url "product_new" %}">{% bootstrap_icon "plus" %} New </a>
 <a href="{% url "product_list" %}">{% bootstrap_icon "collapse-down" %}Active Products</a>
 
 
