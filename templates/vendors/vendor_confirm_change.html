@@ -10,8 +10,9 @@
 {% block content %}
 {% if user.is_authenticated and user.is_superuser %}
 <form method="post">{% csrf_token %}
-    {% if vendor.active == 1 %}
+    {% if object.active == 1 %}
     Are you sure you want to disable? "{{ object }}" ?
+    <input type="submit" value="Submit" />
     {% else %}
     Are you sure you want to enable? "{{ object }}" ?
     <input type="submit" value="Submit" />
